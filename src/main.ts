@@ -64,9 +64,10 @@ deskLight.target.position.set(0, 0.8, -2.5)
 scene.add(deskLight)
 scene.add(deskLight.target)
 
+const BASE = import.meta.env.BASE_URL
 const loader = new GLTFLoader()
 
-loader.load('/models/Light bulb.glb', (gltf) => {
+loader.load(BASE + 'models/Light bulb.glb', (gltf) => {
     const bulb = gltf.scene
     bulb.position.set(0, 2.5, -2.9)
     bulb.rotation.y = Math.PI / -2
@@ -74,14 +75,14 @@ loader.load('/models/Light bulb.glb', (gltf) => {
     scene.add(bulb)
 })
 
-loader.load('/models/Adjustable Desk.glb', (gltf) => {
+loader.load(BASE + 'models/Adjustable Desk.glb', (gltf) => {
     const desk = gltf.scene
     desk.position.set(0, 0, -2.5)
     desk.rotation.y = Math.PI / -2
     scene.add(desk)
 })
 
-loader.load('/models/Mousepad.glb', (gltf) => {
+loader.load(BASE + 'models/Mousepad.glb', (gltf) => {
     const mousepad = gltf.scene
     mousepad.position.set(0, 0.95, -2.35)
     mousepad.rotation.y = Math.PI / 0.5
@@ -89,7 +90,7 @@ loader.load('/models/Mousepad.glb', (gltf) => {
     scene.add(mousepad)
 })
 
-loader.load('/models/Flipper.glb', (gltf) => {
+loader.load(BASE + 'models/Flipper.glb', (gltf) => {
     const flipper = gltf.scene
     flipper.position.set(-0.9, 0.97, -2.2)
     flipper.rotation.y = Math.PI / -3
@@ -97,7 +98,7 @@ loader.load('/models/Flipper.glb', (gltf) => {
     scene.add(flipper)
 })
 
-loader.load('/models/Mouse.glb', (gltf) => {
+loader.load(BASE + 'models/Mouse.glb', (gltf) => {
     const mouse = gltf.scene
     mouse.position.set(0.5, 0.95, -2.2)
     mouse.rotation.y = Math.PI / 2
@@ -105,7 +106,7 @@ loader.load('/models/Mouse.glb', (gltf) => {
     scene.add(mouse)
 })
 
-loader.load('/models/Raspi.glb', (gltf) => {
+loader.load(BASE + 'models/Raspi.glb', (gltf) => {
     const raspi = gltf.scene
     raspi.position.set(0.6, 1, -1.95)
     raspi.rotation.x = Math.PI / 0.5
@@ -114,7 +115,7 @@ loader.load('/models/Raspi.glb', (gltf) => {
     scene.add(raspi)
 })
 
-loader.load('/models/Flash.glb', (gltf) => {
+loader.load(BASE + 'models/Flash.glb', (gltf) => {
     const flash = gltf.scene
     flash.position.set(0.8, 1, -2.1)
     flash.rotation.x = Math.PI / 0.5
@@ -123,7 +124,7 @@ loader.load('/models/Flash.glb', (gltf) => {
     scene.add(flash)
 })
 
-loader.load('/models/Wifi.glb', (gltf) => {
+loader.load(BASE + 'models/Wifi.glb', (gltf) => {
     const wifi = gltf.scene
     wifi.position.set(0.8, 0.9, -2.9)
     wifi.rotation.x = Math.PI / -0.5
@@ -131,7 +132,7 @@ loader.load('/models/Wifi.glb', (gltf) => {
     scene.add(wifi)
 })
 
-loader.load('/models/Server1.glb', (gltf) => {
+loader.load(BASE + 'models/Server1.glb', (gltf) => {
     const server1 = gltf.scene
     server1.position.set(3, 0, -2.35)
     server1.rotation.y = Math.PI
@@ -139,7 +140,7 @@ loader.load('/models/Server1.glb', (gltf) => {
     scene.add(server1)
 })
 
-loader.load('/models/Server2.glb', (gltf) => {
+loader.load(BASE + 'models/Server2.glb', (gltf) => {
     const server2 = gltf.scene
     server2.position.set(2.7, 0, -1.5)
     server2.rotation.y = Math.PI / -2
@@ -147,7 +148,7 @@ loader.load('/models/Server2.glb', (gltf) => {
     scene.add(server2)
 })
 
-loader.load('/models/Server2.glb', (gltf) => {
+loader.load(BASE + 'models/Server2.glb', (gltf) => {
     const server2 = gltf.scene
     server2.position.set(2.75, 0, -0.8)
     server2.rotation.y = Math.PI / -2
@@ -155,7 +156,7 @@ loader.load('/models/Server2.glb', (gltf) => {
     scene.add(server2)
 })
 
-loader.load('/models/Old server.glb', (gltf) => {
+loader.load(BASE + 'models/Old server.glb', (gltf) => {
     const server2 = gltf.scene
     server2.position.set(2.9, 0, 0)
     server2.rotation.y = Math.PI
@@ -163,7 +164,7 @@ loader.load('/models/Old server.glb', (gltf) => {
     scene.add(server2)
 })
 
-loader.load('/models/laptop.glb', (gltf) => {
+loader.load(BASE + 'models/laptop.glb', (gltf) => {
     const laptop = gltf.scene
     laptop.position.set(-0.5, 1, -2.5)
     laptop.rotation.y = Math.PI / -0.55
@@ -179,7 +180,7 @@ loader.load('/models/laptop.glb', (gltf) => {
 })
 
 
-loader.load('/models/Glock.glb', (gltf) => {
+loader.load(BASE + 'models/Glock.glb', (gltf) => {
     const glock = gltf.scene
     glock.position.set(0.55, 0.95, -1.9)
     glock.rotation.y = Math.PI
