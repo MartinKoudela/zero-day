@@ -29,8 +29,16 @@ export class Terminal {
 
         const prompt = document.createElement('span')
         this.promptEl = prompt
-        this.promptEl.textContent = '> '
-        this.addLine('Enter your username:')
+        const savedUsername = sessionStorage.getItem('l0k1-username')
+        if (savedUsername) {
+            this.username = savedUsername
+            this.promptEl.textContent = `${this.username}@L0k1:~$ `
+            this.addLine(`Welcome back, ${this.username}`)
+            this.addLine('Type "help" for available commands.')
+        } else {
+            this.promptEl.textContent = '> '
+            this.addLine('Enter your username:')
+        }
 
         this.inputEl = document.createElement('input')
         this.inputEl.type = 'text'
@@ -67,6 +75,7 @@ export class Terminal {
             this.addLine(`Welcome, ${this.username}`)
             this.addLine('Type "help" for available commands.')
             this.promptEl.textContent = `${this.username}@L0k1:~$ `
+            sessionStorage.setItem('l0k1-username', this.username)
             return
         }
 
@@ -76,6 +85,7 @@ export class Terminal {
 
         const action = this.commands[cmd]
 
+        //Commands
         if (cmd === 'whoami') {
             this.addLine(this.username)
             return

@@ -4,19 +4,31 @@ import {Terminal} from './terminal/terminal'
 
 const terminal = new Terminal(document.getElementById('menu')!, {
     'help': () => {
-        terminal.addLine('Commands:')
-        terminal.addLine('  ls              - list files')
-        terminal.addLine('  cat <file>      - read a file')
+        terminal.addLine('=== Important ===')
         terminal.addLine('  ./survival      - start survival mode')
         terminal.addLine('  ./endless       - start endless mode')
+        terminal.addLine('  cat readme      - how to play')
+        terminal.addLine('')
+        terminal.addLine('=== FILES ===')
+        terminal.addLine('  ls              - list files')
+        terminal.addLine('  cat <file>      - read a file')
+        terminal.addLine('')
+        terminal.addLine('=== SYSTEM ===')
         terminal.addLine('  whoami          - show current user')
+        terminal.addLine('  hostname        - show hostname')
+        terminal.addLine('  pwd             - print working directory')
         terminal.addLine('  date            - show date and time')
-        terminal.addLine('  uname           - show system information')
-        terminal.addLine('  uname -a        - show system information with username')
-        terminal.addLine('  ifconfig        - show network configuration')
-        terminal.addLine('  hostname          - show hostname')
-        terminal.addLine('  exit            - exit the terminal')
-        return '  clear           - clear terminal'
+        terminal.addLine('  uptime          - show system uptime')
+        terminal.addLine('  uname           - show system info')
+        terminal.addLine('  uname -a        - show full system info')
+        terminal.addLine('  id              - show user id')
+        terminal.addLine('  ifconfig        - show network config')
+        terminal.addLine('  neofetch        - show system overview')
+        terminal.addLine('')
+        terminal.addLine('=== OTHER ===')
+        terminal.addLine('  clear           - clear terminal')
+        terminal.addLine('  exit            - exit terminal')
+        return '  help            - show this message'
     },
     'ls': () => {
         terminal.addLine('readme')
