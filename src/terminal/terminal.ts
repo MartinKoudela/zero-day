@@ -8,8 +8,7 @@ export class Terminal {
     private username: string | null = null
     private promptEl: HTMLSpanElement
 
-    constructor(container: HTMLElement, commands: Record<string, (args:
-                                                                  string)
+    constructor(container: HTMLElement, commands: Record<string, (args: string)
         => string>) {
         const time = new Date().toLocaleString()
 
@@ -71,15 +70,20 @@ export class Terminal {
             this.addLine(`> ${this.username}`)
             this.addLine(`Welcome, ${this.username}`)
             this.addLine('Type "help" for available commands.')
-            this.promptEl.textContent = `${this.username}@zero_day:~$ `
+            this.promptEl.textContent = `${this.username}@L0k1:~$ `
             return
         }
 
         if (!cmd) return
 
-        this.addLine(`${this.username}@zero_day:~$ ${cmd}`)
+        this.addLine(`${this.username}@L0k1:~$ ${cmd}`)
 
         const action = this.commands[cmd]
+
+        if (cmd === 'whoami') {
+            this.addLine(this.username)
+            return
+        }
 
         if (action) {
             const response = action(cmd)

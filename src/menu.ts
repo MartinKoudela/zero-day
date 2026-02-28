@@ -4,7 +4,19 @@ import { Terminal } from './terminal/terminal'
 
 const terminal = new Terminal(document.getElementById('menu')!, {
     'help': () => 'Commands: play survival, play endless, how to play, settings',
-    'play survival': () => { window.location.href = '/game.html?mode=survival';
-        return 'Loading...' },
-    // ...
+    'play survival': () => {
+        window.location.href = '/game.html?mode=survival'
+        return 'Loading survival mode...'
+    },
+    'play endless': () => {
+       // window.location.href = '/game.html?mode=endless'
+        // return 'Loading endless mode...'
+        return 'Coming soon...'
+    },
+    'how to play': () => {
+        return 'Hack the system, watch your back. Don\'t get caught.'
+    },
+    'settings': () => {
+        return 'Settings: coming soon'
+    },
 })
