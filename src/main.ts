@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
 document.addEventListener('click', () => {
     document.body.requestFullscreen().catch(
@@ -49,6 +50,46 @@ const frontWall = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), wallMaterial)
 frontWall.position.set(0, 1.5, 3)
 frontWall.rotation.y = Math.PI
 scene.add(frontWall)
+
+const ceilingMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc })
+const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), ceilingMaterial)
+ceiling.rotation.x = Math.PI / 2
+ceiling.position.y = 3
+scene.add(ceiling)
+
+const deskLight = new THREE.SpotLight(0xffffff, 5, 10, Math.PI / 3)
+deskLight.penumbra = 0.8
+deskLight.position.set(0, 2.7, -2.9)
+deskLight.target.position.set(0, 0.8, -2.5)
+scene.add(deskLight)
+scene.add(deskLight.target)
+
+const loader = new GLTFLoader()
+
+loader.load('/models/Light bulb.glb', (gltf) => {
+    const bulb = gltf.scene
+    bulb.position.set(0, 2.5, -2.9)
+    bulb.rotation.y = Math.PI / -2
+    bulb.scale.set(0.05, 0.05, 0.05)
+    scene.add(bulb)
+})
+
+loader.load('/models/Adjustable Desk.glb', (gltf) => {
+    const desk = gltf.scene
+    desk.position.set(0, 0, -2.5)
+    desk.rotation.y = Math.PI / -2
+    scene.add(desk)
+})
+
+loader.load('/models/Glock.glb', (gltf) => {
+    const glock = gltf.scene
+    glock.position.set(0.55, 0.95, -1.8)
+    glock.rotation.y = Math.PI
+    glock.rotation.x = Math.PI / 2
+    glock.rotation.z = Math.PI / -3
+    glock.scale.set(1, 1, 1)
+    scene.add(glock)
+})
 
 camera.position.set(0, 1.5, -1.5) // pozice kamery
 
