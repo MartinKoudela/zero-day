@@ -81,13 +81,111 @@ loader.load('/models/Adjustable Desk.glb', (gltf) => {
     scene.add(desk)
 })
 
+loader.load('/models/Mousepad.glb', (gltf) => {
+    const mousepad = gltf.scene
+    mousepad.position.set(0, 0.95, -2.35)
+    mousepad.rotation.y = Math.PI / 0.5
+    mousepad.scale.set(0.3, 0.3, 0.3)
+    scene.add(mousepad)
+})
+
+loader.load('/models/Flipper.glb', (gltf) => {
+    const flipper = gltf.scene
+    flipper.position.set(-0.9, 0.97, -2.2)
+    flipper.rotation.y = Math.PI / -3
+    flipper.scale.set(0.0015, 0.0015, 0.0015)
+    scene.add(flipper)
+})
+
+loader.load('/models/Mouse.glb', (gltf) => {
+    const mouse = gltf.scene
+    mouse.position.set(0.5, 0.95, -2.2)
+    mouse.rotation.y = Math.PI / 2
+    mouse.scale.set(0.04, 0.04, 0.04)
+    scene.add(mouse)
+})
+
+loader.load('/models/Raspi.glb', (gltf) => {
+    const raspi = gltf.scene
+    raspi.position.set(0.6, 1, -1.95)
+    raspi.rotation.x = Math.PI / 0.5
+    raspi.rotation.y = Math.PI / 7
+    raspi.scale.set(0.015, 0.015, 0.015)
+    scene.add(raspi)
+})
+
+loader.load('/models/Flash.glb', (gltf) => {
+    const flash = gltf.scene
+    flash.position.set(0.8, 1, -2.1)
+    flash.rotation.x = Math.PI / 0.5
+    flash.rotation.y = Math.PI / -7
+    flash.scale.set(0.0002, 0.0002, 0.0002)
+    scene.add(flash)
+})
+
+loader.load('/models/Wifi.glb', (gltf) => {
+    const wifi = gltf.scene
+    wifi.position.set(0.8, 0.9, -2.9)
+    wifi.rotation.x = Math.PI / -0.5
+    wifi.scale.set(1, 1, 1)
+    scene.add(wifi)
+})
+
+loader.load('/models/Server1.glb', (gltf) => {
+    const server1 = gltf.scene
+    server1.position.set(3, 0, -2.35)
+    server1.rotation.y = Math.PI
+    server1.scale.set(0.4, 0.4, 0.4)
+    scene.add(server1)
+})
+
+loader.load('/models/Server2.glb', (gltf) => {
+    const server2 = gltf.scene
+    server2.position.set(2.7, 0, -1.5)
+    server2.rotation.y = Math.PI / -2
+    server2.scale.set(0.8, 0.8, 0.8)
+    scene.add(server2)
+})
+
+loader.load('/models/Server2.glb', (gltf) => {
+    const server2 = gltf.scene
+    server2.position.set(2.75, 0, -0.8)
+    server2.rotation.y = Math.PI / -2
+    server2.scale.set(0.8, 0.8, 0.8)
+    scene.add(server2)
+})
+
+loader.load('/models/Old server.glb', (gltf) => {
+    const server2 = gltf.scene
+    server2.position.set(2.9, 0, 0)
+    server2.rotation.y = Math.PI
+    server2.scale.set(0.4, 0.4, 0.4)
+    scene.add(server2)
+})
+
+loader.load('/models/laptop.glb', (gltf) => {
+    const laptop = gltf.scene
+    laptop.position.set(-0.5, 1, -2.5)
+    laptop.rotation.y = Math.PI / -0.55
+    laptop.scale.set(0.015, 0.015, 0.015)
+
+    laptop.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.name === 'Screen_ComputerScreen_0') {
+            child.material = new THREE.MeshBasicMaterial({ color: 0x000000 })
+        }
+    })
+
+    scene.add(laptop)
+})
+
+
 loader.load('/models/Glock.glb', (gltf) => {
     const glock = gltf.scene
-    glock.position.set(0.55, 0.95, -1.8)
+    glock.position.set(0.55, 0.95, -1.9)
     glock.rotation.y = Math.PI
     glock.rotation.x = Math.PI / 2
     glock.rotation.z = Math.PI / -3
-    glock.scale.set(1, 1, 1)
+    glock.scale.set(1.2, 1.2, 1.2)
     scene.add(glock)
 })
 
