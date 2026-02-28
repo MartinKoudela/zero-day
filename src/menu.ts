@@ -4,7 +4,7 @@ import {Terminal} from './terminal/terminal'
 
 const terminal = new Terminal(document.getElementById('menu')!, {
     'help': () => {
-        terminal.addLine('=== Important ===')
+        terminal.addLine('=== GAME ===')
         terminal.addLine('  ./survival      - start survival mode')
         terminal.addLine('  ./endless       - start endless mode')
         terminal.addLine('  cat readme      - how to play')
@@ -23,13 +23,20 @@ const terminal = new Terminal(document.getElementById('menu')!, {
         terminal.addLine('  uname -a        - show full system info')
         terminal.addLine('  id              - show user id')
         terminal.addLine('  ifconfig        - show network config')
+        terminal.addLine('  netstat         - show connections')
         terminal.addLine('  neofetch        - show system overview')
+        terminal.addLine('  top / htop      - show running processes')
+        terminal.addLine('  ps              - list processes')
+        terminal.addLine('  free            - show memory usage')
+        terminal.addLine('  df              - show disk usage')
+        terminal.addLine('  echo <text>     - print text')
         terminal.addLine('')
         terminal.addLine('=== OTHER ===')
         terminal.addLine('  clear           - clear terminal')
         terminal.addLine('  exit            - exit terminal')
         return '  help            - show this message'
     },
+
     'ls': () => {
         terminal.addLine('readme')
         terminal.addLine('settings')
@@ -37,14 +44,11 @@ const terminal = new Terminal(document.getElementById('menu')!, {
         terminal.addLine('endless')
         return 'fsoceity'
     },
-
     './survival': () => {
         window.location.href = '/game.html?mode=survival'
         return 'Loading survival mode...'
     },
     './endless': () => {
-        // window.location.href = '/game.html?mode=endless'
-        // return 'Loading endless mode...'
         return 'Coming soon...'
     },
     'cat readme': () => {
@@ -53,9 +57,37 @@ const terminal = new Terminal(document.getElementById('menu')!, {
         terminal.addLine('Watch your back - if they find you, it\'s over.')
         return 'Type "help" to see all available commands.'
     },
-    'settings': () => {
-        return 'Settings: coming soon'
-    },
+    'cat settings': () => 'Settings: coming soon',
+    'cat fsoceity': () => 'We are watching you.',
+    'cat survival': () => 'Executable file. Use ./survival to run.',
+    'cat endless': () => 'Executable file. Use ./endless to run.',
 
-    'cat fsoceity': () => 'We are watching you.'
+    'ssh': () => 'Usage: ssh <user>@<host> (available in game)',
+    'scp': () => 'Usage: scp <file> <user>@<host>:<path> (available in game)',
+    'wget': () => 'Usage: wget <url> (available in game)',
+    'curl': () => 'Usage: curl <url> (available in game)',
+    'nc': () => 'Usage: nc <host> <port> (available in game)',
+    'ncat': () => 'Usage: ncat <host> <port> (available in game)',
+    'nmap': () => 'Usage: nmap <ip> (available in game)',
+    'ping': () => 'Usage: ping <host> (available in game)',
+    'grep': () => 'Usage: grep <pattern> <file> (available in game)',
+
+    'chmod': () => 'Permission denied: restricted shell',
+    'mkdir': () => 'Permission denied: restricted shell',
+    'rm': () => 'Permission denied: restricted shell',
+    'touch': () => 'Permission denied: restricted shell',
+    'mv': () => 'Permission denied: restricted shell',
+    'cp': () => 'Permission denied: restricted shell',
+    'cd': () => 'Permission denied: restricted shell',
+    'nano': () => 'Permission denied: restricted shell',
+    'vim': () => 'Permission denied: restricted shell',
+    'kill': () => 'Permission denied: restricted shell',
+    'shutdown': () => 'Permission denied: restricted shell',
+    'reboot': () => 'Permission denied: restricted shell',
+    'systemctl': () => 'Permission denied: restricted shell',
+    'service': () => 'Permission denied: restricted shell',
+    'dd': () => 'Permission denied: restricted shell',
+    'mkfs': () => 'Permission denied: restricted shell',
+    'fdisk': () => 'Permission denied: restricted shell',
+    'mount': () => 'Permission denied: restricted shell',
 })

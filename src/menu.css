@@ -12,12 +12,6 @@ body {
     height: 100vh;
 }
 
-#terminal {
-    width: 700px;
-    max-width: 90vw;
-    max-height: 80vh;
-}
-
 #menu {
     width: 700px;
     max-width: 90vw;
