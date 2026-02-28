@@ -58,10 +58,6 @@ export class Terminal {
         this.outputEl.scrollTop = this.outputEl.scrollHeight
     }
 
-    clear() {
-        this.outputEl.innerHTML = ''
-    }
-
     private handleCommand(input: string) {
         const cmd = input.trim().toLowerCase()
 
@@ -82,6 +78,88 @@ export class Terminal {
 
         if (cmd === 'whoami') {
             this.addLine(this.username)
+            return
+        }
+
+        if (cmd === 'clear') {
+            this.outputEl.innerHTML = ''
+            return
+        }
+
+        if (cmd === 'ifconfig') {
+            this.addLine('eth0: 192.168.1.105  netmask 255.255.255.0')
+            return
+        }
+
+        if (cmd === 'exit') {
+            this.addLine('There is no escape.')
+            return
+        }
+
+        if (cmd === 'date') {
+            this.addLine(new Date().toLocaleString())
+            return
+        }
+
+        if (cmd === 'hostname') {
+            this.addLine(this.username + '-node.local')
+            return
+        }
+
+        if (cmd === 'uname') {
+            this.addLine('L0K1 OS 1.0.0 x86_64')
+            return
+        }
+
+        if (cmd === 'uname -a') {
+            this.addLine('L0K1 OS 1.0.0 ' + this.username + '-node x86_64 GNU/Linux')
+            return
+        }
+
+        if (cmd === 'id') {
+            this.addLine(`uid=1000(${this.username}) gid=1000(${this.username})
+  groups=1000(${this.username}),27(sudo)`)
+            return
+        }
+
+        if (cmd === 'uptime') {
+            this.addLine(`up ${Math.floor(Math.random() * 365)} days,
+  ${Math.floor(Math.random() * 24)}:${String(Math.floor(Math.random() *
+                60)).padStart(2, '0')}`)
+            return
+        }
+
+        if (cmd === 'pwd') {
+            this.addLine('/home/' + this.username)
+            return
+        }
+
+        if (cmd === 'sudo') {
+            this.addLine('Nice try.')
+            return
+        }
+
+        if (cmd === 'neofetch') {
+            const logo = [
+                '  ██╗      ██████╗ ██╗  ██╗ ██╗',
+                '  ██║     ██╔═══██╗██║ ██╔╝███║',
+                '  ██║     ██║   ██║█████╔╝ ╚██║',
+                '  ██║     ██║   ██║██╔═██╗  ██║',
+                '  ███████╗╚██████╔╝██║  ██╗ ██║',
+                '  ╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═╝',
+            ]
+            logo.forEach(line => {
+                const p = document.createElement('p')
+                p.textContent = line
+                p.classList.add('neofetch-logo')
+                this.outputEl.appendChild(p)
+            })
+            this.addLine('')
+            this.addLine('OS: L0K1 OS 1.0.0 x86_64')
+            this.addLine('Host: ' + this.username + '-node')
+            this.addLine('Kernel: 6.1.0-l0k1')
+            this.addLine('Shell: l0k1-sh 1.0')
+            this.addLine('Terminal: L0K1 Terminal')
             return
         }
 

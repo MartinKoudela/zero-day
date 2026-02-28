@@ -13,6 +13,12 @@
     color: #aaaaaa;
 }
 
+.neofetch-logo {
+    font-family: monospace;
+    white-space: pre;
+    line-height: 1.2;
+}
+
 #terminal-input-line span {
     color: #00ff41;
     white-space: nowrap;
