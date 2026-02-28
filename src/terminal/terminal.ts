@@ -121,7 +121,7 @@ export class Terminal {
         }
 
         if (cmd === 'hostname') {
-            this.addLine(this.username + '-node.local')
+            this.addLine('L0k1-node.local')
             return
         }
 
