@@ -1,0 +1,34 @@
+#terminal-output {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#terminal-output p {
+    margin: 0;
+    padding: 0 0;
+    line-height: 1.6;
+}
+
+#login-div {
+    color: #aaaaaa;
+}
+
+#terminal-input-line span {
+    color: #00ff41;
+    white-space: nowrap;
+}
+
+#terminal-input-line {
+    margin-top: 2px;
+}
+
+#terminal-input {
+    background: none;
+    border: none;
+    outline: none;
+    color: #00ff41;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    width: calc(100% - 200px);
+    caret-color: #00ff41;
+}

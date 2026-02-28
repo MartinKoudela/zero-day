@@ -35,22 +35,13 @@ body {
     font-size: 14px;
 }
 
-#hud-title {
-    font-size: 20px;
-    font-weight: 700;
+#hud-streak {
+    font-size: 12px;
 }
 
 #hud-danger {
     color: #ff3333;
     text-shadow: 0 0 10px #ff3333;
-}
-
-#hud-progress {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    font-size: 12px;
 }
 
 #terminal {
