@@ -1,6 +1,12 @@
 import './style.css'
 import * as THREE from 'three'
 
+document.addEventListener('click', () => {
+    document.body.requestFullscreen().catch(
+        (err) => console.error('Error requesting fullscreen:', err)
+    )
+}, { once: true })
+
 const scene = new THREE.Scene() // vytvorim scenu
 scene.background = new THREE.Color(0x0a0a0a) // nastavim background
 
@@ -44,12 +50,12 @@ frontWall.position.set(0, 1.5, 3)
 frontWall.rotation.y = Math.PI
 scene.add(frontWall)
 
-camera.position.set(0, 1.5, 0) // pozice kamery
+camera.position.set(0, 1.5, -1.5) // pozice kamery
 
 let targetRotationY = 0
 let targetRotationX = 0
-const maxRotationY = Math.PI * 0.6
-const maxRotationX = Math.PI * 0.3
+const maxRotationY = Math.PI * 0.9
+const maxRotationX = Math.PI * 0.15
 
 document.addEventListener('mousemove', (e) => {
     const mouseX = (e.clientX / window.innerWidth) * 2 - 1
