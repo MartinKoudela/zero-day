@@ -45,7 +45,7 @@ const terminal = new Terminal(document.getElementById('menu')!, {
         return 'fsoceity'
     },
     './survival': () => {
-        window.location.href = './game.html?mode=survival'
+        window.location.href = './loading.html?mode=survival'
         return 'Loading survival mode...'
     },
     './endless': () => {

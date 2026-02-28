@@ -106,6 +106,14 @@ loader.load(BASE + 'models/Mouse.glb', (gltf) => {
     scene.add(mouse)
 })
 
+loader.load(BASE + 'models/Keyboard.glb', (gltf) => {
+    const keyboard = gltf.scene
+    keyboard.position.set(0, 1, -2.2)
+    keyboard.rotation.y = Math.PI / -0.5
+    keyboard.scale.set(0.025, 0.025, 0.025)
+    scene.add(keyboard)
+})
+
 loader.load(BASE + 'models/Raspi.glb', (gltf) => {
     const raspi = gltf.scene
     raspi.position.set(0.6, 1, -1.95)
@@ -114,6 +122,43 @@ loader.load(BASE + 'models/Raspi.glb', (gltf) => {
     raspi.scale.set(0.015, 0.015, 0.015)
     scene.add(raspi)
 })
+
+loader.load(BASE + 'models/Headphones.glb', (gltf) => {
+    const headphones = gltf.scene
+    headphones.position.set(0.4, 1, -2.75)
+    headphones.rotation.x = Math.PI / 2
+    headphones.rotation.z = Math.PI / 3
+    headphones.scale.set(0.0002, 0.0002, 0.0002)
+    scene.add(headphones)
+})
+
+loader.load(BASE + 'models/Rf.glb', (gltf) => {
+    const rf = gltf.scene
+    rf.position.set(0.8, 1, -1.7)
+    rf.rotation.x = Math.PI / 0.5
+    rf.rotation.y = Math.PI / -9
+    rf.scale.set(0.05, 0.05, 0.05)
+    scene.add(rf)
+})
+
+loader.load(BASE + 'models/Pc cable.glb', (gltf) => {
+    const cable = gltf.scene
+    cable.position.set(0.7, 1, -2.3)
+    cable.rotation.x = Math.PI
+    cable.rotation.y = Math.PI / 1.5
+    cable.scale.set(0.015, 0.015, 0.015)
+    scene.add(cable)
+})
+
+loader.load(BASE + 'models/Camera.glb', (gltf) => {
+    const camera = gltf.scene
+    camera.position.set(-2.5, 2.95, -2.83)
+    camera.rotation.x = Math.PI / -1
+    camera.rotation.y = Math.PI / 1.4
+    camera.scale.set(0.08, 0.08, 0.08)
+    scene.add(camera)
+})
+
 
 loader.load(BASE + 'models/Flash.glb', (gltf) => {
     const flash = gltf.scene
