@@ -1,14 +1,14 @@
 import './style.css'
 import * as THREE from 'three'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
 
 document.addEventListener('click', () => {
     document.body.requestFullscreen().catch(
         (err) => console.error('Error requesting fullscreen:', err)
     )
-}, { once: true })
+}, {once: true})
 
-const scene = new THREE.Scene() // vytvorim scenu
+const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x0a0a0a) // nastavim background
 
 const canvas = document.getElementById('game-canvas') as HTMLCanvasElement // najdu canvas
@@ -30,7 +30,7 @@ floor.rotation.x = -Math.PI / 2
 floor.position.y = 0
 scene.add(floor)
 
-const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa })
+const wallMaterial = new THREE.MeshStandardMaterial({color: 0xaaaaaa})
 
 const backWall = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), wallMaterial)
 backWall.position.set(0, 1.5, -3)
@@ -51,7 +51,7 @@ frontWall.position.set(0, 1.5, 3)
 frontWall.rotation.y = Math.PI
 scene.add(frontWall)
 
-const ceilingMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc })
+const ceilingMaterial = new THREE.MeshStandardMaterial({color: 0xcccccc})
 const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), ceilingMaterial)
 ceiling.rotation.x = Math.PI / 2
 ceiling.position.y = 3
@@ -132,6 +132,77 @@ loader.load(BASE + 'models/Headphones.glb', (gltf) => {
     scene.add(headphones)
 })
 
+loader.load(BASE + 'models/Case.glb', (gltf) => {
+    const PCcase = gltf.scene
+    PCcase.position.set(-0.93, 0, -2.8)
+    PCcase.rotation.x = Math.PI / -2
+    PCcase.rotation.z = Math.PI
+    PCcase.scale.set(0.011, 0.011, 0.011)
+    scene.add(PCcase)
+})
+
+
+const textureLoader = new THREE.TextureLoader()
+
+const monitorScreenTex = textureLoader.load(BASE + 'assets/textures/screen.png')
+monitorScreenTex.rotation = Math.PI / 2
+monitorScreenTex.center.set(0.5, 0.5)
+monitorScreenTex.repeat.set(2, 2)
+monitorScreenTex.offset.set(0.5, 0.1)
+
+const curvedScreenTex = textureLoader.load(BASE + 'assets/textures/screen.png')
+curvedScreenTex.rotation = -Math.PI / 2
+curvedScreenTex.center.set(0.5, 0.5)
+curvedScreenTex.repeat.set(2, 2)
+curvedScreenTex.offset.set(0.9, -0.28)
+
+const laptopScreenTex = textureLoader.load(BASE + 'assets/textures/laptop-screen.jpg')
+laptopScreenTex.rotation = Math.PI / -0.5
+laptopScreenTex.center.set(1, 1)
+laptopScreenTex.repeat.set(2, 2)
+laptopScreenTex.offset.set(0.1, -0.1)
+
+loader.load(BASE + 'models/Monitor.glb', (gltf) => {
+    const monitor = gltf.scene
+    monitor.position.set(-0.6, 1, -2.8)
+    monitor.rotation.y = Math.PI / -2.3
+    monitor.scale.set(0.0012, 0.0012, 0.0012)
+    monitor.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.name === 'group_0002_layar_0') {
+            child.material = new THREE.MeshBasicMaterial({map: monitorScreenTex})
+        }
+    })
+    scene.add(monitor)
+})
+
+loader.load(BASE + 'models/Curved monitor.glb', (gltf) => {
+    const curved = gltf.scene
+    curved.position.set(0.4, 0.9, -2.2)
+    curved.rotation.y = Math.PI / -4
+    curved.scale.set(0.09, 0.09, 0.09)
+    curved.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.name === 'Object_5') {
+            child.material = new THREE.MeshBasicMaterial({map: curvedScreenTex, color: 0x666666})
+        }
+    })
+    scene.add(curved)
+})
+
+loader.load(BASE + 'models/laptop.glb', (gltf) => {
+    const laptop = gltf.scene
+    laptop.position.set(-0.5, 1, -2.35)
+    laptop.rotation.y = Math.PI / -0.55
+    laptop.scale.set(0.015, 0.015, 0.015)
+
+    laptop.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.name === 'Screen_ComputerScreen_0') {
+            child.material = new THREE.MeshBasicMaterial({map: laptopScreenTex, color: 0x999999})
+        }
+    })
+
+    scene.add(laptop)
+})
+
 loader.load(BASE + 'models/Rf.glb', (gltf) => {
     const rf = gltf.scene
     rf.position.set(0.8, 1, -1.7)
@@ -143,9 +214,9 @@ loader.load(BASE + 'models/Rf.glb', (gltf) => {
 
 loader.load(BASE + 'models/Pc cable.glb', (gltf) => {
     const cable = gltf.scene
-    cable.position.set(0.7, 1, -2.3)
+    cable.position.set(0.1, 1, -2.7)
     cable.rotation.x = Math.PI
-    cable.rotation.y = Math.PI / 1.5
+    cable.rotation.y = Math.PI / -0.5
     cable.scale.set(0.015, 0.015, 0.015)
     scene.add(cable)
 })
@@ -162,7 +233,7 @@ loader.load(BASE + 'models/Camera.glb', (gltf) => {
 
 loader.load(BASE + 'models/Flash.glb', (gltf) => {
     const flash = gltf.scene
-    flash.position.set(0.8, 1, -2.1)
+    flash.position.set(0.8, 1, -1.8)
     flash.rotation.x = Math.PI / 0.5
     flash.rotation.y = Math.PI / -7
     flash.scale.set(0.0002, 0.0002, 0.0002)
@@ -208,22 +279,6 @@ loader.load(BASE + 'models/Old server.glb', (gltf) => {
     server2.scale.set(0.4, 0.4, 0.4)
     scene.add(server2)
 })
-
-loader.load(BASE + 'models/laptop.glb', (gltf) => {
-    const laptop = gltf.scene
-    laptop.position.set(-0.5, 1, -2.5)
-    laptop.rotation.y = Math.PI / -0.55
-    laptop.scale.set(0.015, 0.015, 0.015)
-
-    laptop.traverse((child) => {
-        if (child instanceof THREE.Mesh && child.name === 'Screen_ComputerScreen_0') {
-            child.material = new THREE.MeshBasicMaterial({ color: 0x000000 })
-        }
-    })
-
-    scene.add(laptop)
-})
-
 
 loader.load(BASE + 'models/Glock.glb', (gltf) => {
     const glock = gltf.scene
