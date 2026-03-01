@@ -25,8 +25,18 @@ const models = [
     'Pc cable.glb',
     'Rf.glb',
     'Keyboard.glb',
-    'Hacker laptop.glb',
     'Headphones.glb',
+    'Sofa.glb',
+    'Case.glb',
+    'Monitor.glb',
+    'Curved monitor.glb',
+    'Speaker.glb',
+    'Window.glb',
+    'Locker.glb',
+    'Skateboard.glb',
+    'Drone.glb',
+    'Kitchen.glb',
+    'Carpet.glb',
 ]
 
 function setProgress(value: number) {

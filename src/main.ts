@@ -9,12 +9,12 @@ document.addEventListener('click', () => {
 }, {once: true})
 
 const scene = new THREE.Scene()
-scene.background = new THREE.Color(0x0a0a0a) // nastavim background
+scene.background = new THREE.Color(0x0a0a0a)
 
-const canvas = document.getElementById('game-canvas') as HTMLCanvasElement // najdu canvas
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000) // nastavim kameru
-const renderer = new THREE.WebGLRenderer({canvas}) // nastavim renderer
-renderer.setSize(window.innerWidth, window.innerHeight)  // velikost okna
+const canvas = document.getElementById('game-canvas') as HTMLCanvasElement
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+const renderer = new THREE.WebGLRenderer({canvas})
+renderer.setSize(window.innerWidth, window.innerHeight)
 
 const ambientLight = new THREE.AmbientLight(0x999999)
 scene.add(ambientLight)
@@ -80,6 +80,62 @@ loader.load(BASE + 'models/Adjustable Desk.glb', (gltf) => {
     desk.position.set(0, 0, -2.5)
     desk.rotation.y = Math.PI / -2
     scene.add(desk)
+})
+
+loader.load(BASE + 'models/Sofa.glb', (gltf) => {
+    const sofa = gltf.scene
+    sofa.position.set(-2.55, 0, 0.4)
+    sofa.rotation.y = Math.PI / 2
+    scene.add(sofa)
+})
+
+loader.load(BASE + 'models/Window.glb', (gltf) => {
+    const window = gltf.scene
+    window.position.set(-2.95, 2.35, -0.56)
+    window.rotation.y = Math.PI / 2
+    window.rotation.x = Math.PI / -2
+    window.rotation.z = Math.PI / -2
+    window.scale.set(0.6, 0.6, 0.6)
+
+    scene.add(window)
+})
+
+loader.load(BASE + 'models/Locker.glb', (gltf) => {
+    const locker = gltf.scene
+    locker.position.set(-2.6, 0, -2)
+    locker.rotation.y = Math.PI
+    scene.add(locker)
+})
+
+loader.load(BASE + 'models/Skateboard.glb', (gltf) => {
+    const skate = gltf.scene
+    skate.position.set(-1.95, 0.7, -2.65)
+    skate.rotation.x = Math.PI / 2.5
+    skate.scale.set(0.13, 0.13, 0.13)
+    scene.add(skate)
+})
+
+loader.load(BASE + 'models/Drone.glb', (gltf) => {
+    const drone = gltf.scene
+    drone.position.set(-2.5, 1.95, -1.5)
+    drone.rotation.y = Math.PI / 3
+    drone.scale.set(1.3, 1.3, 1.3)
+    scene.add(drone)
+})
+
+loader.load(BASE + 'models/Kitchen.glb', (gltf) => {
+    const kitchen = gltf.scene
+    kitchen.position.set(0.4, 0, 2.4)
+    kitchen.rotation.y = Math.PI / 2
+    scene.add(kitchen)
+})
+
+loader.load(BASE + 'models/Carpet.glb', (gltf) => {
+    const carpet = gltf.scene
+    carpet.position.set(-1.9, 0.08, 0.5)
+    carpet.rotation.y = Math.PI
+    carpet.scale.set(1.8, 1.5, 1.8)
+    scene.add(carpet)
 })
 
 loader.load(BASE + 'models/Mousepad.glb', (gltf) => {
@@ -214,11 +270,20 @@ loader.load(BASE + 'models/Rf.glb', (gltf) => {
 
 loader.load(BASE + 'models/Pc cable.glb', (gltf) => {
     const cable = gltf.scene
-    cable.position.set(0.1, 1, -2.7)
+    cable.position.set(-0.05, 1, -2.7)
     cable.rotation.x = Math.PI
     cable.rotation.y = Math.PI / -0.5
     cable.scale.set(0.015, 0.015, 0.015)
     scene.add(cable)
+})
+
+loader.load(BASE + 'models/Speaker.glb', (gltf) => {
+    const speaker = gltf.scene
+    speaker.position.set(0.07, 0.98, -2.7)
+    speaker.rotation.x = Math.PI / -0.5
+    speaker.rotation.y = Math.PI / -0.5
+    speaker.scale.set(1.4, 1.4, 1.4)
+    scene.add(speaker)
 })
 
 loader.load(BASE + 'models/Camera.glb', (gltf) => {
