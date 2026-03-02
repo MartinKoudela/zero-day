@@ -291,3 +291,39 @@ export class Terminal {
         this.addLine('Command not found: ' + cmd + '. Type "help" for commands.')
     }
 }
+
+const win = document.getElementById('window')!
+const titlebar = document.getElementById('window-titlebar')!
+const wrapper = document.getElementById('menu-wrapper')!
+
+function centerWindow() {
+    const wr = wrapper.getBoundingClientRect()
+    win.style.left = (wr.width - win.offsetWidth) / 2 + 'px'
+    win.style.top = (wr.height - win.offsetHeight) / 2 + 'px'
+}
+centerWindow()
+window.addEventListener('resize', centerWindow)
+
+let dragX = 0, dragY = 0, dragging = false
+
+titlebar.addEventListener('mousedown', (e) => {
+    dragging = true
+    dragX = e.clientX - win.offsetLeft
+    dragY = e.clientY - win.offsetTop
+})
+
+document.addEventListener('mousemove', (e) => {
+    if (!dragging) return
+    const wr = wrapper.getBoundingClientRect()
+    let x = e.clientX - dragX
+    let y = e.clientY - dragY
+    x = Math.max(0, Math.min(x, wr.width - win.offsetWidth))
+    y = Math.max(0, Math.min(y, wr.height - win.offsetHeight))
+    win.style.left = x + 'px'
+    win.style.top = y + 'px'
+})
+
+document.addEventListener('mouseup', () => {
+    dragging = false
+})
+
