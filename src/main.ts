@@ -75,6 +75,44 @@ const wallMaterial = new THREE.MeshStandardMaterial({
     roughnessMap: wallRoughness,
 })
 
+
+const wall2Color = textureLoader.load(BASE + 'assets/textures/wall2/PaintedPlaster015_2K-JPG_Color.jpg')
+wall2Color.wrapS = THREE.RepeatWrapping
+wall2Color.wrapT = THREE.RepeatWrapping
+wall2Color.repeat.set(1, 1)
+
+const wall2Normal = textureLoader.load(BASE + 'assets/textures/wall2/PaintedPlaster015_2K-JPG_NormalDX.jpg')
+wall2Normal.wrapS = THREE.RepeatWrapping
+wall2Normal.wrapT = THREE.RepeatWrapping
+wall2Normal.repeat.set(1, 1)
+
+const wall2Roughness = textureLoader.load(BASE + 'assets/textures/wall2/PaintedPlaster015_2K-JPG_Roughness.jpg')
+wall2Roughness.wrapS = THREE.RepeatWrapping
+wall2Roughness.wrapT = THREE.RepeatWrapping
+wall2Roughness.repeat.set(1, 1)
+
+
+const wall2Material = new THREE.MeshStandardMaterial({
+    map: wall2Color,
+    color: 0xbbbbbb,
+    normalMap: wall2Normal,
+    roughnessMap: wall2Roughness,
+})
+
+const wall2SideColor = wall2Color.clone()
+wall2SideColor.repeat.set(0.1, 0.3)
+const wall2SideNormal = wall2Normal.clone()
+wall2SideNormal.repeat.set(0.1, 0.3)
+const wall2SideRoughness = wall2Roughness.clone()
+wall2SideRoughness.repeat.set(0.1, 0.3)
+
+const wall2SideMaterial = new THREE.MeshStandardMaterial({
+    map: wall2SideColor,
+    color: 0xbbbbbb,
+    normalMap: wall2SideNormal,
+    roughnessMap: wall2SideRoughness,
+})
+
 const rightWallShape = new THREE.Shape()
 rightWallShape.moveTo(-3, -1.5)
 rightWallShape.lineTo(3, -1.5)
@@ -91,12 +129,12 @@ doorHole.lineTo(2.2, 1)
 
 rightWallShape.holes.push(doorHole)
 
-const rightWall = new THREE.Mesh(new THREE.ShapeGeometry(rightWallShape), wallMaterial)
+const rightWall = new THREE.Mesh(new THREE.ShapeGeometry(rightWallShape), wall2SideMaterial)
 rightWall.position.set(3, 1.5, 0)
 rightWall.rotation.y = -Math.PI / 2
 scene.add(rightWall)
 
-const backWall = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), wallMaterial)
+const backWall = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), wall2Material)
 backWall.position.set(0, 1.5, -3)
 scene.add(backWall)
 
@@ -111,8 +149,8 @@ const windowHole = new THREE.Path()
 windowHole.moveTo(-1.16, 0.8)
 windowHole.lineTo(-0.6, 0.8)
 windowHole.lineTo(-0.6, -0.5)
-windowHole.lineTo(-2, -0.5)
-windowHole.lineTo(-2, 0.8)
+windowHole.lineTo(-1.9, -0.5)
+windowHole.lineTo(-1.9, 0.8)
 
 const windowHole2 = new THREE.Path()
 windowHole2.moveTo(0.6, -0.5)
@@ -123,12 +161,12 @@ windowHole2.lineTo(-0.1, -0.5)
 
 leftWallShape.holes.push(windowHole, windowHole2)
 
-const leftWall = new THREE.Mesh(new THREE.ShapeGeometry(leftWallShape), wallMaterial)
+const leftWall = new THREE.Mesh(new THREE.ShapeGeometry(leftWallShape), wall2SideMaterial)
 leftWall.position.set(-3, 1.5, 0)
 leftWall.rotation.y = Math.PI / 2
 scene.add(leftWall)
 
-const frontWall = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), wallMaterial)
+const frontWall = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), wall2Material)
 frontWall.position.set(0, 1.5, 3)
 frontWall.rotation.y = Math.PI
 scene.add(frontWall)
@@ -153,7 +191,7 @@ const ceilingMaterial = new THREE.MeshStandardMaterial({
     normalMap: ceilingNormal,
     roughnessMap: ceilingRoughness,
 })
-const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), ceilingMaterial)
+const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), wallMaterial)
 ceiling.rotation.x = Math.PI / 2
 ceiling.position.y = 3
 scene.add(ceiling)
@@ -164,6 +202,36 @@ deskLight.position.set(0, 3.5, -2)
 deskLight.target.position.set(0, 0.8, -2.5)
 scene.add(deskLight)
 scene.add(deskLight.target)
+
+
+const nextRoomFloor = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), floorMaterial)
+nextRoomFloor.rotation.x = -Math.PI / 2
+nextRoomFloor.position.set(5, 0, 1.65)
+scene.add(nextRoomFloor)
+
+const nextRoomBack = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), wallMaterial)
+nextRoomBack.position.set(5, 1.5, -0.35)
+scene.add(nextRoomBack)
+
+const nextRoomRight = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), wallMaterial)
+nextRoomRight.position.set(7, 1.5, 1.65)
+nextRoomRight.rotation.y = -Math.PI / 2
+scene.add(nextRoomRight)
+
+const nextRoomFront = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), wallMaterial)
+nextRoomFront.position.set(5, 1.5, 3.65)
+nextRoomFront.rotation.y = Math.PI
+scene.add(nextRoomFront)
+
+const nextRoomCeiling = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), ceilingMaterial)
+nextRoomCeiling.rotation.x = Math.PI / 2
+nextRoomCeiling.position.set(5, 3, 1.65)
+scene.add(nextRoomCeiling)
+
+const nextRoomLight = new THREE.PointLight(0xffffff, 2, 8)
+nextRoomLight.position.set(5, 2.5, 1.65)
+scene.add(nextRoomLight)
+
 
 const loader = new GLTFLoader()
 
@@ -320,6 +388,14 @@ loader.load(BASE + 'models/Kitchen.glb', (gltf) => {
     kitchen.position.set(0.4, 0, 2.4)
     kitchen.rotation.y = Math.PI / 2
     kitchen.scale.set(1.15, 1.15, 1.15)
+    scene.add(kitchen)
+})
+
+loader.load(BASE + 'models/Lamp.glb', (gltf) => {
+    const kitchen = gltf.scene
+    kitchen.position.set(-2.6, 1, 2.7)
+    kitchen.rotation.y = Math.PI / 2
+    kitchen.scale.set(1, 1, 1)
     scene.add(kitchen)
 })
 
