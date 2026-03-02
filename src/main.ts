@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
+import {DRACOLoader} from 'three/addons/loaders/DRACOLoader.js'
 
 document.addEventListener('click', () => {
     document.body.requestFullscreen().catch(
@@ -233,7 +234,11 @@ nextRoomLight.position.set(5, 2.5, 1.65)
 scene.add(nextRoomLight)
 
 
+const dracoLoader = new DRACOLoader()
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/')
+
 const loader = new GLTFLoader()
+loader.setDRACOLoader(dracoLoader)
 
 loader.load(BASE + 'models/Ceiling.glb', (gltf) => {
     const ceiling = gltf.scene
@@ -320,35 +325,29 @@ loader.load(BASE + 'models/Plug.glb', (gltf) => {
 })
 
 loader.load(BASE + 'models/Cables.glb', (gltf) => {
-    const cables = gltf.scene
-    cables.position.set(1, 0.85, -2.7)
-    cables.rotation.y = Math.PI / -0.9
-    cables.scale.set(0.09, 0.045, 0.04)
-    scene.add(cables)
-})
+    const cables1 = gltf.scene
+    cables1.position.set(1, 0.85, -2.7)
+    cables1.rotation.y = Math.PI / -0.9
+    cables1.scale.set(0.09, 0.045, 0.04)
+    scene.add(cables1)
 
-loader.load(BASE + 'models/Cables.glb', (gltf) => {
-    const cables = gltf.scene
-    cables.position.set(3, 0.4, -1.5)
-    cables.rotation.y = Math.PI / -2
-    cables.scale.set(0.06, 0.045, 0.04)
-    scene.add(cables)
-})
+    const cables2 = cables1.clone()
+    cables2.position.set(3, 0.4, -1.5)
+    cables2.rotation.y = Math.PI / -2
+    cables2.scale.set(0.06, 0.045, 0.04)
+    scene.add(cables2)
 
-loader.load(BASE + 'models/Cables.glb', (gltf) => {
-    const cables = gltf.scene
-    cables.position.set(2.95, 0.8, -1.2)
-    cables.rotation.y = Math.PI / -2
-    cables.scale.set(0.06, 0.045, 0.04)
-    scene.add(cables)
-})
+    const cables3 = cables1.clone()
+    cables3.position.set(2.95, 0.8, -1.2)
+    cables3.rotation.y = Math.PI / -2
+    cables3.scale.set(0.06, 0.045, 0.04)
+    scene.add(cables3)
 
-loader.load(BASE + 'models/Cables.glb', (gltf) => {
-    const cables = gltf.scene
-    cables.position.set(3, 1.2, -1.7)
-    cables.rotation.y = Math.PI / -2
-    cables.scale.set(0.06, 0.045, 0.04)
-    scene.add(cables)
+    const cables4 = cables1.clone()
+    cables4.position.set(3, 1.2, -1.7)
+    cables4.rotation.y = Math.PI / -2
+    cables4.scale.set(0.06, 0.045, 0.04)
+    scene.add(cables4)
 })
 
 loader.load(BASE + 'models/Skateboard.glb', (gltf) => {
@@ -360,15 +359,13 @@ loader.load(BASE + 'models/Skateboard.glb', (gltf) => {
 })
 
 loader.load(BASE + 'models/Shoes.glb', (gltf) => {
-    const skate = gltf.scene
-    skate.position.set(-2.2, 0.4, -2.5)
-    skate.rotation.y = Math.PI / -1
-    skate.scale.set(1.4, 1.3, 1.3)
-    scene.add(skate)
-})
+    const shoe1 = gltf.scene
+    shoe1.position.set(-2.2, 0.4, -2.5)
+    shoe1.rotation.y = Math.PI / -1
+    shoe1.scale.set(1.4, 1.3, 1.3)
+    scene.add(shoe1)
 
-loader.load(BASE + 'models/Shoes.glb', (gltf) => {
-    const shoe2 = gltf.scene
+    const shoe2 = shoe1.clone()
     shoe2.position.set(-2.4, 0.4, -2.35)
     shoe2.rotation.y = Math.PI / -1.3
     shoe2.scale.set(1.4, 1.3, 1.3)
@@ -605,19 +602,17 @@ loader.load(BASE + 'models/Poster.glb', (gltf) => {
 })
 
 loader.load(BASE + 'models/Graffiti4.glb', (gltf) => {
-    const graffiti = gltf.scene
-    graffiti.position.set(0, 0, -2.99)
-    graffiti.rotation.y = Math.PI / -0.5
-    graffiti.scale.set(1, 1, 1)
-    scene.add(graffiti)
-})
+    const graffiti4a = gltf.scene
+    graffiti4a.position.set(0, 0, -2.99)
+    graffiti4a.rotation.y = Math.PI / -0.5
+    graffiti4a.scale.set(1, 1, 1)
+    scene.add(graffiti4a)
 
-loader.load(BASE + 'models/Graffiti4.glb', (gltf) => {
-    const graffiti = gltf.scene
-    graffiti.position.set(-2.5, -0.2, -2.99)
-    graffiti.rotation.y = Math.PI / -0.5
-    graffiti.scale.set(1, 1, 1)
-    scene.add(graffiti)
+    const graffiti4b = graffiti4a.clone()
+    graffiti4b.position.set(-2.5, -0.2, -2.99)
+    graffiti4b.rotation.y = Math.PI / -0.5
+    graffiti4b.scale.set(1, 1, 1)
+    scene.add(graffiti4b)
 })
 
 loader.load(BASE + 'models/Graffiti2.glb', (gltf) => {
@@ -629,43 +624,47 @@ loader.load(BASE + 'models/Graffiti2.glb', (gltf) => {
 })
 
 loader.load(BASE + 'models/Graffiti.glb', (gltf) => {
-    const graffiti2 = gltf.scene
-    graffiti2.position.set(1, 1.8, 2.99)
-    graffiti2.rotation.y = Math.PI / -1
-    graffiti2.scale.set(0.01, 0.01, 0.01)
-    scene.add(graffiti2)
-})
+    const graffitiA = gltf.scene
+    graffitiA.position.set(1, 1.8, 2.99)
+    graffitiA.rotation.y = Math.PI / -1
+    graffitiA.scale.set(0.01, 0.01, 0.01)
+    scene.add(graffitiA)
 
-loader.load(BASE + 'models/Graffiti.glb', (gltf) => {
-    const graffiti4 = gltf.scene
-    graffiti4.position.set(1, 4.1, 2.99)
-    graffiti4.rotation.y = Math.PI / -1
-    graffiti4.scale.set(0.01, 0.01, 0.01)
-    scene.add(graffiti4)
+    const graffitiB = graffitiA.clone()
+    graffitiB.position.set(1, 4.1, 2.99)
+    graffitiB.rotation.y = Math.PI / -1
+    graffitiB.scale.set(0.01, 0.01, 0.01)
+    scene.add(graffitiB)
+
+    const graffitiC = graffitiA.clone()
+    graffitiC.position.set(2.99, 1, -0.9)
+    graffitiC.rotation.y = Math.PI / -2
+    graffitiC.scale.set(0.01, 0.01, 0.01)
+    scene.add(graffitiC)
 })
 
 loader.load(BASE + 'models/Graffiti1.glb', (gltf) => {
-    const graffiti3 = gltf.scene
-    graffiti3.position.set(-1.8, 1, 2.99)
-    graffiti3.rotation.y = Math.PI / -1
-    graffiti3.scale.set(0.015, 0.015, 0.015)
-    scene.add(graffiti3)
+    const graffiti1a = gltf.scene
+    graffiti1a.position.set(-1.8, 1, 2.99)
+    graffiti1a.rotation.y = Math.PI / -1
+    graffiti1a.scale.set(0.015, 0.015, 0.015)
+    scene.add(graffiti1a)
+})
+
+loader.load(BASE + 'models/Graffiti1.glb', (gltf) => {
+    const graffiti1b = gltf.scene
+    graffiti1b.position.set(2.55, 1.25, 1.9)
+    graffiti1b.rotation.y = Math.PI / 1.2
+    graffiti1b.scale.set(0.0065, 0.0068, 0.0099)
+    scene.add(graffiti1b)
 })
 
 loader.load(BASE + 'models/Graffiti3.glb', (gltf) => {
     const graffiti3 = gltf.scene
     graffiti3.position.set(2.99, 0.3, -0.5)
-    graffiti3.rotation.y = Math.PI / - 2
+    graffiti3.rotation.y = Math.PI / -2
     graffiti3.scale.set(0.014, 0.014, 0.014)
     scene.add(graffiti3)
-})
-
-loader.load(BASE + 'models/Graffiti.glb', (gltf) => {
-    const graffiti = gltf.scene
-    graffiti.position.set(2.99, 1, -0.9)
-    graffiti.rotation.y = Math.PI / - 2
-    graffiti.scale.set(0.01, 0.01, 0.01)
-    scene.add(graffiti)
 })
 
 loader.load(BASE + 'models/Camera.glb', (gltf) => {
@@ -704,24 +703,22 @@ loader.load(BASE + 'models/Server1.glb', (gltf) => {
 })
 
 loader.load(BASE + 'models/Server2.glb', (gltf) => {
-    const server2 = gltf.scene
-    server2.position.set(2.7, 0, -1.5)
-    server2.rotation.y = Math.PI / -2
-    server2.scale.set(0.8, 0.8, 0.8)
-    scene.add(server2)
-})
+    const server2a = gltf.scene
+    server2a.position.set(2.7, 0, -1.5)
+    server2a.rotation.y = Math.PI / -2
+    server2a.scale.set(0.8, 0.8, 0.8)
+    scene.add(server2a)
 
-loader.load(BASE + 'models/Server2.glb', (gltf) => {
-    const server2 = gltf.scene
-    server2.position.set(2.75, 0, -0.8)
-    server2.rotation.y = Math.PI / -2
-    server2.scale.set(0.8, 0.8, 0.8)
-    scene.add(server2)
+    const server2b = server2a.clone()
+    server2b.position.set(2.75, 0, -0.8)
+    server2b.rotation.y = Math.PI / -2
+    server2b.scale.set(0.8, 0.8, 0.8)
+    scene.add(server2b)
 })
 
 loader.load(BASE + 'models/Old server.glb', (gltf) => {
     const server2 = gltf.scene
-    server2.position.set(2.9, 0, 0)
+    server2.position.set(2.7, 0, 0)
     server2.rotation.y = Math.PI
     server2.scale.set(0.4, 0.4, 0.4)
     scene.add(server2)
@@ -790,11 +787,29 @@ audioLoader.load(BASE + 'assets/sounds/floor-cracking.wav', (buffer) => {
 })
 doorSoundSource.add(crackSound)
 
+const waterSound = new THREE.PositionalAudio(listener)
+audioLoader.load(BASE + 'assets/sounds/water.wav', (buffer) => {
+    waterSound.setBuffer(buffer)
+    waterSound.setVolume(0.5)
+    waterSound.setRefDistance(2)
+    waterSound.setMaxDistance(18)
+})
+doorSoundSource.add(waterSound)
+
+const phoneSound = new THREE.PositionalAudio(listener)
+audioLoader.load(BASE + 'assets/sounds/phonering.wav', (buffer) => {
+    phoneSound.setBuffer(buffer)
+    phoneSound.setVolume(0.5)
+    phoneSound.setRefDistance(2)
+    phoneSound.setMaxDistance(18)
+})
+doorSoundSource.add(phoneSound)
+
 const ambulanceSound = new THREE.PositionalAudio(listener)
 audioLoader.load(BASE + 'assets/sounds/ambulance.mp3', (buffer) => {
     ambulanceSound.setBuffer(buffer)
     ambulanceSound.setVolume(2)
-    ambulanceSound.setRefDistance(1)
+    ambulanceSound.setRefDistance(5)
     ambulanceSound.setMaxDistance(15)
 })
 windowSoundSource.add(ambulanceSound)
@@ -803,7 +818,7 @@ const fanLoopSound = new THREE.Audio(listener)
 audioLoader.load(BASE + 'assets/sounds/fan.wav', (buffer) => {
     fanLoopSound.setBuffer(buffer)
     fanLoopSound.setLoop(true)
-    fanLoopSound.setVolume(0.5)
+    fanLoopSound.setVolume(2)
     fanLoopSound.play()
 })
 
@@ -811,8 +826,8 @@ const serversLoopSound = new THREE.PositionalAudio(listener)
 audioLoader.load(BASE + 'assets/sounds/servers.wav', (buffer) => {
     serversLoopSound.setBuffer(buffer)
     serversLoopSound.setLoop(true)
-    serversLoopSound.setRefDistance(5)
-    serversLoopSound.setMaxDistance(40)
+    serversLoopSound.setRefDistance(2)
+    serversLoopSound.setMaxDistance(30)
     serversLoopSound.play()
 })
 serversSoundSource.add(serversLoopSound)
@@ -840,6 +855,20 @@ function playRandomCrack() {
     setTimeout(playRandomCrack, 20000 + Math.random() * 40000)
 }
 
+function playRandomWater() {
+    if (!waterSound.isPlaying) {
+        waterSound.play()
+    }
+    setTimeout(playRandomWater, 20000 + Math.random() * 40000)
+}
+
+function playRandomPhone() {
+    if (!phoneSound.isPlaying) {
+        phoneSound.play()
+    }
+    setTimeout(playRandomPhone, 20000 + Math.random() * 40000)
+}
+
 function playRandomAmbulance() {
     if (!ambulanceSound.isPlaying) {
         ambulanceSound.play()
@@ -850,7 +879,8 @@ function playRandomAmbulance() {
 setTimeout(playRandomDog, 5000 + Math.random() * 15000)
 setTimeout(playRandomCrack, 10000 + Math.random() * 20000)
 setTimeout(playRandomAmbulance, 25000 + Math.random() * 30000)
-
+setTimeout(playRandomWater, 30000 + Math.random() * 40000)
+setTimeout(playRandomPhone, 35000 + Math.random() * 50000)
 
 // camera.position.set(0, 1.5, -1.5) // pozice kamery
 camera.position.set(0, 1.5, -1.5) // pozice kamery - development

@@ -8,8 +8,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div id="menu">
+<nav id="topbar">
+    <div class="topbar-left">
+        <i class="fa-solid fa-skull"></i>
+        <span>L0k1 OS</span>
+    </div>
+
+    <div class="topbar-right">
+        <span id="topbar-date"></span>
+        <span id="topbar-time"></span>
+    </div>
+</nav>
+<div id="menu-wrapper">
+    <div id="window">
+        <div id="window-titlebar">
+            <div class="window-buttons">
+                <span class="window-btn btn-close"><i class="fa-solid fa-xmark"></i></span>
+                <span class="window-btn btn-minimize"><i class="fa-solid fa-minus"></i></span>
+                <span class="window-btn btn-maximize"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+            </div>
+            <span class="window-title">Terminal</span>
+            <div class="window-buttons-spacer"></div>
+        </div>
+        <div id="menu">
+        </div>
+    </div>
 </div>
+<footer id="bottombar">
+    <div class="bottombar-left">
+        <i class="fa-solid fa-terminal" title="Terminal"></i>
+        <i class="fa-solid fa-folder" title="Files"></i>
+        <i class="fa-solid fa-globe" title="Browser"></i>
+    </div>
+    <div class="bottombar-right">
+        <i class="fa-brands fa-usb" title="Flash Drive"></i>
+        <i class="fa-brands fa-bluetooth-b" title="Bluetooth"></i>
+        <i class="fa-solid fa-signal" title="Signal"></i>
+        <i class="fa-solid fa-volume-medium" title="Volume"></i>
+        <i class="fa-solid fa-wifi" title="WiFi"></i>
+        <i class="fa-solid fa-battery-three-quarters" title="Battery"></i>
+        <span>73%</span>
+    </div>
+</footer>
 <script type="module" src="/src/menu.ts"></script>
 </body>
 </html>

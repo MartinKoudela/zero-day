@@ -97,3 +97,9 @@ const terminal = new Terminal(document.getElementById('menu')!, {
     'fdisk': () => 'Permission denied: restricted shell',
     'mount': () => 'Permission denied: restricted shell',
 })
+
+const date = document.getElementById('topbar-date')
+const time = document.getElementById('topbar-time')
+
+date && setInterval(() => date.innerHTML = new Date().toLocaleDateString(), 1000)
+time && setInterval(() => time.innerHTML = new Date().toLocaleTimeString(), 1000)

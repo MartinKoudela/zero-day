@@ -3,6 +3,7 @@ import './terminal.css'
 export class Terminal {
 
     private outputEl: HTMLDivElement
+    private containerEl: HTMLElement
     private inputEl: HTMLInputElement
     private commands: Record<string, (args: string) => string>
     private username: string | null = null
@@ -13,6 +14,7 @@ export class Terminal {
         const time = new Date().toLocaleString()
 
         this.commands = commands
+        this.containerEl = container
 
         this.outputEl = document.createElement('div')
         this.outputEl.id = 'terminal-output'
@@ -62,7 +64,7 @@ export class Terminal {
         line.textContent = text
         this.outputEl.appendChild(line)
 
-        this.outputEl.scrollTop = this.outputEl.scrollHeight
+        this.containerEl.scrollTop = this.containerEl.scrollHeight
     }
 
     getUsername(): string | null {

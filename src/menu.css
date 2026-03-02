@@ -7,19 +7,165 @@
 body {
     background: #000;
     display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Ubuntu Mono', monospace;
+    color: #00ff41;
+}
+
+#topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    padding: 0 16px;
+    background: #0a0a0a;
+    border-bottom: 1px solid #00ff4120;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #00ff41b0;
+    font-size: 12px;
+}
+
+#menu-wrapper {
+    flex: 1;
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    overflow: hidden;
+    padding: 16px;
+}
+
+#window {
+    width: 100%;
+    max-width: 700px;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #00ff4130;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 255, 65, 0.05);
+}
+
+#window-titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    padding: 0 12px;
+    background: #111;
+    border-bottom: 1px solid #00ff4120;
+    flex-shrink: 0;
+}
+
+.window-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 60px;
+}
+
+.window-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.window-btn i {
+    font-size: 7px;
+    color: transparent;
+    transition: color 0.15s;
+}
+
+.window-buttons:hover .window-btn i {
+    color: #000000cc;
+}
+
+.btn-close {
+    background: #ff5f57;
+}
+
+.btn-minimize {
+    background: #ffbd2e;
+}
+
+.btn-maximize {
+    background: #28c840;
+}
+
+.window-title {
+    font-size: 12px;
+    color: #00ff4180;
+}
+
+.window-buttons-spacer {
+    width: 60px;
 }
 
 #menu {
-    width: 700px;
-    max-width: 90vw;
+    width: 100%;
     background: #0a0a0a;
-    border: 1px solid #00ff4130;
-    border-radius: 4px;
     padding: 16px;
-    font-family: 'Ubuntu Mono', monospace;
     font-size: 14px;
-    color: #00ff41;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+}
+
+#bottombar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    padding: 0 16px;
+    background: #0a0a0a;
+    border-top: 1px solid #00ff4120;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.bottombar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bottombar-left i {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.bottombar-left i:first-child {
+    opacity: 1;
+}
+
+.bottombar-left i:hover {
+    opacity: 1;
+}
+
+.bottombar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ff41b0;
+    font-size: 12px;
 }
