@@ -57,9 +57,9 @@ ceiling.rotation.x = Math.PI / 2
 ceiling.position.y = 3
 scene.add(ceiling)
 
-const deskLight = new THREE.SpotLight(0xffffff, 5, 10, Math.PI / 3)
+const deskLight = new THREE.SpotLight(0xffffff, 12, 9, Math.PI / 3)
 deskLight.penumbra = 0.8
-deskLight.position.set(0, 2.7, -2.9)
+deskLight.position.set(0, 3.5, -2)
 deskLight.target.position.set(0, 0.8, -2.5)
 scene.add(deskLight)
 scene.add(deskLight.target)
@@ -67,12 +67,33 @@ scene.add(deskLight.target)
 const BASE = import.meta.env.BASE_URL
 const loader = new GLTFLoader()
 
-loader.load(BASE + 'models/Light bulb.glb', (gltf) => {
-    const bulb = gltf.scene
-    bulb.position.set(0, 2.5, -2.9)
-    bulb.rotation.y = Math.PI / -2
-    bulb.scale.set(0.05, 0.05, 0.05)
-    scene.add(bulb)
+loader.load(BASE + 'models/Ceiling.glb', (gltf) => {
+    const ceiling = gltf.scene
+    ceiling.position.set(0, 3, -2.7)
+    ceiling.rotation.y = Math.PI
+    ceiling.scale.set(0.2, 0.2, 0.2)
+    scene.add(ceiling)
+})
+
+loader.load(BASE + 'models/Fan.glb', (gltf) => {
+    const fan = gltf.scene
+    fan.position.set(0, 0.08, 0.6)
+    fan.rotation.y = Math.PI
+    fan.scale.set(0.9, 0.9, 0.9)
+    scene.add(fan)
+
+    const mixer = new THREE.AnimationMixer(fan)
+    const clip = gltf.animations[0] // první animace
+    mixer.clipAction(clip).play()
+
+    const clock = new THREE.Clock()
+
+    function updateAnimation() {
+        requestAnimationFrame(updateAnimation)
+        mixer.update(clock.getDelta())
+    }
+
+    updateAnimation()
 })
 
 loader.load(BASE + 'models/Adjustable Desk.glb', (gltf) => {
@@ -80,6 +101,14 @@ loader.load(BASE + 'models/Adjustable Desk.glb', (gltf) => {
     desk.position.set(0, 0, -2.5)
     desk.rotation.y = Math.PI / -2
     scene.add(desk)
+})
+
+loader.load(BASE + 'models/Chair.glb', (gltf) => {
+    const chair = gltf.scene
+    chair.position.set(0, 0, -1.5)
+    chair.rotation.y = Math.PI
+    chair.scale.set(1.3, 1.3, 1.3)
+    scene.add(chair)
 })
 
 loader.load(BASE + 'models/Sofa.glb', (gltf) => {
@@ -96,7 +125,6 @@ loader.load(BASE + 'models/Window.glb', (gltf) => {
     window.rotation.x = Math.PI / -2
     window.rotation.z = Math.PI / -2
     window.scale.set(0.6, 0.6, 0.6)
-
     scene.add(window)
 })
 
@@ -105,6 +133,54 @@ loader.load(BASE + 'models/Locker.glb', (gltf) => {
     locker.position.set(-2.6, 0, -2)
     locker.rotation.y = Math.PI
     scene.add(locker)
+})
+
+loader.load(BASE + 'models/Bag.glb', (gltf) => {
+    const bag = gltf.scene
+    bag.position.set(-2.8, 2.1, -2.4)
+    bag.rotation.y = Math.PI / -2
+    bag.scale.set(0.3, 0.3, 0.3)
+    scene.add(bag)
+})
+
+loader.load(BASE + 'models/Plug.glb', (gltf) => {
+    const plug = gltf.scene
+    plug.position.set(0, 0, -2.5)
+    plug.rotation.y = Math.PI / -1
+    plug.scale.set(0.2, 0.2, 0.2)
+    scene.add(plug)
+})
+
+loader.load(BASE + 'models/Cables.glb', (gltf) => {
+    const cables = gltf.scene
+    cables.position.set(1, 0.85, -2.7)
+    cables.rotation.y = Math.PI / -0.9
+    cables.scale.set(0.09, 0.045, 0.04)
+    scene.add(cables)
+})
+
+loader.load(BASE + 'models/Cables.glb', (gltf) => {
+    const cables = gltf.scene
+    cables.position.set(3, 0.4, -1.5)
+    cables.rotation.y = Math.PI / -2
+    cables.scale.set(0.06, 0.045, 0.04)
+    scene.add(cables)
+})
+
+loader.load(BASE + 'models/Cables.glb', (gltf) => {
+    const cables = gltf.scene
+    cables.position.set(2.95, 0.8, -1.2)
+    cables.rotation.y = Math.PI / -2
+    cables.scale.set(0.06, 0.045, 0.04)
+    scene.add(cables)
+})
+
+loader.load(BASE + 'models/Cables.glb', (gltf) => {
+    const cables = gltf.scene
+    cables.position.set(3, 1.2, -1.7)
+    cables.rotation.y = Math.PI / -2
+    cables.scale.set(0.06, 0.045, 0.04)
+    scene.add(cables)
 })
 
 loader.load(BASE + 'models/Skateboard.glb', (gltf) => {
@@ -127,7 +203,16 @@ loader.load(BASE + 'models/Kitchen.glb', (gltf) => {
     const kitchen = gltf.scene
     kitchen.position.set(0.4, 0, 2.4)
     kitchen.rotation.y = Math.PI / 2
+    kitchen.scale.set(1.15, 1.15, 1.15)
     scene.add(kitchen)
+})
+
+loader.load(BASE + 'models/Door.glb', (gltf) => {
+    const door = gltf.scene
+    door.position.set(3.1, 0, 4)
+    door.rotation.y = Math.PI / 2
+    door.scale.set(0.03, 0.033, 0.03)
+    scene.add(door)
 })
 
 loader.load(BASE + 'models/Carpet.glb', (gltf) => {
@@ -162,6 +247,14 @@ loader.load(BASE + 'models/Mouse.glb', (gltf) => {
     scene.add(mouse)
 })
 
+loader.load(BASE + 'models/Esp.glb', (gltf) => {
+    const pcb = gltf.scene
+    pcb.position.set(0.5, 1, -2.2)
+    pcb.rotation.y = Math.PI / 2
+    pcb.scale.set(1.6, 1.6, 1.6)
+    scene.add(pcb)
+})
+
 loader.load(BASE + 'models/Keyboard.glb', (gltf) => {
     const keyboard = gltf.scene
     keyboard.position.set(0, 1, -2.2)
@@ -170,6 +263,32 @@ loader.load(BASE + 'models/Keyboard.glb', (gltf) => {
     scene.add(keyboard)
 })
 
+loader.load(BASE + 'models/Monster.glb', (gltf) => {
+    const monster = gltf.scene
+    monster.position.set(0.25, 1, -2.8)
+    monster.rotation.y = Math.PI / -1.1
+    monster.scale.set(0.8, 0.9, 0.8)
+
+    scene.add(monster)
+})
+
+loader.load(BASE + 'models/Bins.glb', (gltf) => {
+    const bins = gltf.scene
+    bins.position.set(0.6, 0, -2.5)
+    bins.rotation.y = Math.PI
+    bins.scale.set(0.2, 0.2, 0.2)
+    scene.add(bins)
+})
+
+loader.load(BASE + 'models/Pizza.glb', (gltf) => {
+    const pizza = gltf.scene
+    pizza.position.set(-2.8, 0, 0.2)
+    pizza.rotation.y = Math.PI / 1.5
+    pizza.scale.set(0.5, 0.5, 0.5)
+    scene.add(pizza)
+})
+
+
 loader.load(BASE + 'models/Raspi.glb', (gltf) => {
     const raspi = gltf.scene
     raspi.position.set(0.6, 1, -1.95)
@@ -177,6 +296,15 @@ loader.load(BASE + 'models/Raspi.glb', (gltf) => {
     raspi.rotation.y = Math.PI / 7
     raspi.scale.set(0.015, 0.015, 0.015)
     scene.add(raspi)
+})
+
+loader.load(BASE + 'models/Garbage.glb', (gltf) => {
+    const garbage = gltf.scene
+    garbage.position.set(2.6, 0, 0.7)
+    garbage.rotation.x = Math.PI / 0.5
+    garbage.rotation.y = Math.PI / -1
+    garbage.scale.set(0.4, 0.4, 0.4)
+    scene.add(garbage)
 })
 
 loader.load(BASE + 'models/Headphones.glb', (gltf) => {
@@ -355,7 +483,8 @@ loader.load(BASE + 'models/Glock.glb', (gltf) => {
     scene.add(glock)
 })
 
-camera.position.set(0, 1.5, -1.5) // pozice kamery
+// camera.position.set(0, 1.5, -1.5) // pozice kamery
+camera.position.set(0, 1.5, -1.5) // pozice kamery - development
 
 let targetRotationY = 0
 let targetRotationX = 0
