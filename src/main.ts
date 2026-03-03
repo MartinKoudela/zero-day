@@ -240,12 +240,15 @@ dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/')
 const loader = new GLTFLoader()
 loader.setDRACOLoader(dracoLoader)
 
+let ceilingModel: THREE.Group | null = null
 loader.load(BASE + 'models/Ceiling.glb', (gltf) => {
+
     const ceiling = gltf.scene
-    ceiling.position.set(0, 3, -2.7)
-    ceiling.rotation.y = Math.PI
-    ceiling.scale.set(0.2, 0.2, 0.2)
+    ceiling.position.set(0, 2.45, -2.7)
+    ceiling.rotation.x = Math.PI / -2
+    ceiling.scale.set(0.6, 0.6, 0.6)
     scene.add(ceiling)
+    ceilingModel = ceiling
 })
 
 loader.load(BASE + 'models/Fan.glb', (gltf) => {
@@ -364,11 +367,13 @@ loader.load(BASE + 'models/Shoes.glb', (gltf) => {
     shoe1.rotation.y = Math.PI / -1
     shoe1.scale.set(1.4, 1.3, 1.3)
     scene.add(shoe1)
+})
 
-    const shoe2 = shoe1.clone()
+loader.load(BASE + 'models/Shoes.glb', (gltf) => {
+    const shoe2 = gltf.scene
     shoe2.position.set(-2.4, 0.4, -2.35)
     shoe2.rotation.y = Math.PI / -1.3
-    shoe2.scale.set(1.4, 1.3, 1.3)
+    shoe2.scale.set(1.3, 1.3, 1.3)
     scene.add(shoe2)
 })
 
@@ -455,7 +460,7 @@ loader.load(BASE + 'models/Monster.glb', (gltf) => {
 
 loader.load(BASE + 'models/Bins.glb', (gltf) => {
     const bins = gltf.scene
-    bins.position.set(0.6, 0, -2.5)
+    bins.position.set(0.5, 0.2, -2.4)
     bins.rotation.y = Math.PI
     bins.scale.set(0.2, 0.2, 0.2)
     scene.add(bins)
@@ -903,6 +908,7 @@ const maxRotationX = Math.PI * 0.15
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
 let zooming = false
+let lights = true
 
 const laptopTarget = {
     pos: new THREE.Vector3(-0.5, 1.35, -2.0),
@@ -923,7 +929,59 @@ canvas.addEventListener('click', (e) => {
     }
 })
 
+canvas.addEventListener('click', (e) => {
+    if (!ceilingModel) return
+
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1
+    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
+
+    raycaster.setFromCamera(mouse, camera)
+    const hits = raycaster.intersectObject(ceilingModel, true)
+
+    if (hits.length > 0) {
+        if (lights) {
+            lightsOff()
+        } else {
+            lightsOn()
+        }
+    }
+})
+
+
 let laptopHovered = false
+let ceilingHovered = false
+
+const originalEmissive = new Map<THREE.Mesh, { color: THREE.Color, intensity: number }>()
+
+function saveOriginalEmissive(model: THREE.Group) {
+    model.traverse((child) => {
+        if (child instanceof THREE.Mesh && 'emissive' in child.material && !originalEmissive.has(child)) {
+            originalEmissive.set(child, {
+                color: child.material.emissive.clone(),
+                intensity: child.material.emissiveIntensity,
+            })
+        }
+    })
+}
+
+function setHoverGlow(model: THREE.Group, hovered: boolean) {
+    saveOriginalEmissive(model)
+    model.traverse((child) => {
+        if (child instanceof THREE.Mesh && 'emissive' in child.material) {
+            if (hovered) {
+                child.material.emissive.set(0x00ff41)
+                child.material.emissiveIntensity = 0.8
+            } else if (!lights && model === ceilingModel) {
+                child.material.emissive.set(0x000000)
+                child.material.emissiveIntensity = 0
+            } else {
+                const orig = originalEmissive.get(child)
+                child.material.emissive.copy(orig?.color ?? new THREE.Color(0x000000))
+                child.material.emissiveIntensity = orig?.intensity ?? 0
+            }
+        }
+    })
+}
 
 document.addEventListener('mousemove', (e) => {
     if (zooming) return
@@ -933,24 +991,74 @@ document.addEventListener('mousemove', (e) => {
     targetRotationY = -mouseX * maxRotationY
     targetRotationX = -mouseY * maxRotationX
 
-    if (!laptopModel) return
     mouse.x = mouseX
     mouse.y = -mouseY
     raycaster.setFromCamera(mouse, camera)
-    const hits = raycaster.intersectObject(laptopModel, true)
-    const hovered = hits.length > 0
 
-    if (hovered !== laptopHovered) {
-        laptopHovered = hovered
-        canvas.style.cursor = hovered ? 'pointer' : ''
-        laptopModel.traverse((child) => {
+    if (laptopModel) {
+        const hovered = raycaster.intersectObject(laptopModel, true).length > 0
+        if (hovered !== laptopHovered) {
+            laptopHovered = hovered
+            setHoverGlow(laptopModel, hovered)
+        }
+    }
+
+    if (ceilingModel) {
+        const hovered = raycaster.intersectObject(ceilingModel, true).length > 0
+        if (hovered !== ceilingHovered) {
+            ceilingHovered = hovered
+            setHoverGlow(ceilingModel, hovered)
+        }
+    }
+
+    canvas.style.cursor = (laptopHovered || ceilingHovered) ? 'pointer' : ''
+})
+
+const savedIntensities = new Map<THREE.Light, number>()
+
+const savedCeilingEmissive = new Map<THREE.Mesh, { color: THREE.Color, intensity: number }>()
+
+function lightsOff() {
+    lights = false
+    scene.traverse((child) => {
+        if (child instanceof THREE.Light) {
+            savedIntensities.set(child, child.intensity)
+            child.intensity = 0
+        }
+    })
+    if (ceilingModel) {
+        ceilingModel.traverse((child) => {
             if (child instanceof THREE.Mesh && 'emissive' in child.material) {
-                child.material.emissive.set(hovered ? 0x00ff41 : 0x000000)
-                child.material.emissiveIntensity = hovered ? 0.8 : 0
+                savedCeilingEmissive.set(child, {
+                    color: child.material.emissive.clone(),
+                    intensity: child.material.emissiveIntensity,
+                })
+                child.material.emissive.set(0x000000)
+                child.material.emissiveIntensity = 0
             }
         })
     }
-})
+}
+
+function lightsOn() {
+    lights = true
+    scene.traverse((child) => {
+        if (child instanceof THREE.Light) {
+            child.intensity = savedIntensities.get(child) ?? 1
+        }
+    })
+    if (ceilingModel) {
+        ceilingModel.traverse((child) => {
+            if (child instanceof THREE.Mesh && 'emissive' in child.material) {
+                const saved = savedCeilingEmissive.get(child)
+                if (saved) {
+                    child.material.emissive.copy(saved.color)
+                    child.material.emissiveIntensity = saved.intensity
+                }
+            }
+        })
+    }
+}
 
 function animate() {
     requestAnimationFrame(animate)
