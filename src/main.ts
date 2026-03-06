@@ -826,6 +826,15 @@ audioLoader.load(BASE + 'assets/sounds/ambulance.mp3', (buffer) => {
 })
 windowSoundSource.add(ambulanceSound)
 
+const shootoutSound = new THREE.PositionalAudio(listener)
+audioLoader.load(BASE + 'assets/sounds/distant-gunshots.wav', (buffer) => {
+    shootoutSound.setBuffer(buffer)
+    shootoutSound.setVolume(0.5)
+    shootoutSound.setRefDistance(3)
+    shootoutSound.setMaxDistance(30)
+})
+windowSoundSource.add(shootoutSound)
+
 const fanLoopSound = new THREE.PositionalAudio(listener)
 audioLoader.load(BASE + 'assets/sounds/fan.wav', (buffer) => {
     fanLoopSound.setBuffer(buffer)
@@ -884,6 +893,13 @@ function playRandomPhone() {
     setTimeout(playRandomPhone, 20000 + Math.random() * 40000)
 }
 
+function playRandomShootout() {
+    if (!shootoutSound.isPlaying) {
+        shootoutSound.play()
+    }
+    setTimeout(playRandomShootout, 20000 + Math.random() * 40000)
+}
+
 function playRandomAmbulance() {
     if (!ambulanceSound.isPlaying) {
         ambulanceSound.play()
@@ -895,7 +911,8 @@ setTimeout(playRandomDog, 5000 + Math.random() * 15000)
 setTimeout(playRandomCrack, 10000 + Math.random() * 20000)
 setTimeout(playRandomAmbulance, 25000 + Math.random() * 30000)
 setTimeout(playRandomWater, 30000 + Math.random() * 40000)
-setTimeout(playRandomPhone, 35000 + Math.random() * 50000)
+setTimeout(playRandomShootout, 35000 + Math.random() * 50000)
+setTimeout(playRandomPhone, 40000 + Math.random() * 60000)
 
 // camera.position.set(0, 1.5, -1.5) // pozice kamery
 camera.position.set(0, 1.5, -1.5) // pozice kamery - development
