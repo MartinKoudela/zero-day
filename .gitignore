@@ -30,3 +30,6 @@ dist-ssr
 public/assets/textures/
 # Sounds
 public/assets/sounds/
+
+# Local Netlify folder
+.netlify
